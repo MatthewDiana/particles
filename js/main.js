@@ -1,36 +1,44 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
-	game.load.image('blueball', 'assets/blue_ball_32_trans.png');
-  game.load.image('redball', 'assets/red_ball_32_trans.png');
+	game.load.image('blueball', 'assets/images/blue_ball_32_trans.png');
+  game.load.image('redball', 'assets/images/red_ball_32_trans.png');
+	game.load.audio('cerebral_infection', 'assets/audio/cerebral_infection.mp3')
 }
 
 var player;
+var music;
+
 var enemyBallGroup;
 var ballSpawnTimer;
 var ballCount;
-var gameOver
+var respawnDelay;
+var gameOver;
 
 function create() {
   game.stage.backgroundColor = "#FFFFFF";
+
+	music = game.add.audio('cerebral_infection');
+	music.play();
+	music.volume = 0.1;
+
   game.physics.startSystem(Phaser.Physics.ARCADE);
   player = game.add.sprite(game.world.centerX - 16, game.world.centerY - 16, 'blueball');
   game.physics.arcade.enable(player);
+
   enemyBallGroup = game.add.physicsGroup();
-
   ballCount = 0;
+	respawnDelay = 5000;
   gameOver = false;
-
   ballSpawnTimer = game.time.create(false);
-  ballSpawnTimer.loop(4000, spawnBall, this);
-  ballSpawnTimer.start();
+	game.time.events.add(Phaser.Timer.SECOND * 12, startSpawning, this);
 
 }
 
 
 function update() {
 
-    game.physics.arcade.moveToPointer(player, 200);
+    game.physics.arcade.moveToPointer(player, 600);
     if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y)) {
       player.body.velocity.setTo(0, 0);
     }
@@ -40,6 +48,12 @@ function update() {
     }
 
 
+}
+
+function startSpawning() {
+	spawnBall();
+	ballSpawnTimer.loop(respawnDelay, spawnBall, this);
+	ballSpawnTimer.start();
 }
 
 function spawnBall() {
@@ -65,6 +79,7 @@ function processHandler(player, enemyBall) {
 function collisionHandler(player, enemyBall) {
   if (!gameOver) {
     gameOver = true;
+		music.stop();
     game.physics.arcade.gravity.y = 1800;
     game.add.text(50, 50, "You lose. Final score: " + ballCount + " balls.")
   }
