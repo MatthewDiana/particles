@@ -63,7 +63,7 @@ function startSpawning() {
 
 function spawnBall() {
   if (!gameOver) {
-    var newBall = enemyBallGroup.create( game.world.randomX, game.world.randomY, 'redball');
+    var newBall = game.add.sprite( game.world.randomX, game.world.randomY, 'redball');
     ballCount++;
     newBall.alpha = 0;
     var fadeIn = game.add.tween(newBall).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
@@ -72,6 +72,7 @@ function spawnBall() {
       newBall.body.velocity.setTo(Math.random() * 300, Math.random() * 300);
       newBall.body.collideWorldBounds = true;
       newBall.body.bounce.set(1);
+			enemyBallGroup.add(newBall);
     }, this);
   }
 }
