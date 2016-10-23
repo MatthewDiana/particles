@@ -1,15 +1,9 @@
-//var game = new Phaser.Game(800, 600, Phaser.AUTO, 'particles', { preload: preload, create: create, update: update });
-var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, 'particles', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'particles', { preload: preload, create: create, update: update });
+//var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, 'particles', { preload: preload, create: create, update: update });
 
 function preload() {
 	game.load.image('blueball', 'assets/images/blue_ball_32_trans.png');
 	game.load.image('redball', 'assets/images/red_ball_32_trans.png');
-	game.load.image('andrei', 'assets/images/andrei_face_64_trans.png');
-	game.load.image('hyeonjae', 'assets/images/hyeonjae_face_64_trans.png');
-	game.load.image('andrew', 'assets/images/andrew_face_64_trans.png');
-	game.load.image('tim', 'assets/images/tim_face_64_trans.png');
-	game.load.image('ryan', 'assets/images/ryan_face_64_trans.png');
-	game.load.image('greg', 'assets/images/greg_face_64_trans.png');
 	game.load.audio('cerebral_infection', 'assets/audio/cerebral_infection.mp3')
 }
 
@@ -25,7 +19,6 @@ var faceArray;
 
 function create() {
   game.stage.backgroundColor = "#FFFFFF";
-	faceArray = ['andrei', 'hyeonjae', 'andrew', 'tim', 'ryan', 'greg'];
 
 	music = game.add.audio('cerebral_infection');
 	music.volume = 0.20;
@@ -69,7 +62,7 @@ function startSpawning() {
 
 function spawnBall() {
   if (!gameOver) {
-    var newBall = enemyBallGroup.create( game.world.randomX, game.world.randomY, faceArray[Math.floor(Math.random()*faceArray.length)]);
+    var newBall = enemyBallGroup.create( game.world.randomX, game.world.randomY, 'redball');
     ballCount++;
     newBall.alpha = 0;
     var fadeIn = game.add.tween(newBall).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
