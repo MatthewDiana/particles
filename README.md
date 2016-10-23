@@ -4,14 +4,14 @@ A fun and simple desktop and mobile HTML5 game.
 
 ## Play
 
-<a href="http://www.matthewdiana.com/particles-phaser">Click here</a> to try the game.
+<a href="http://www.matthewdiana.com/particles">Click here</a> to try the game.
 
 ## Modify
 
 Clone this repository
 
 ```
-git clone https://github.com/MatthewDiana/particles-phaser.git
+git clone https://github.com/MatthewDiana/particles.git
 ```
 
 Game logic can be found in `js/main.js`. Images and audio can be found in `assets/`.
