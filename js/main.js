@@ -32,7 +32,7 @@ function create() {
 
   enemyBallGroup = game.add.physicsGroup();
   ballCount = 0;
-	respawnDelay = 5000;
+	respawnDelay = 2500;
   gameOver = false;
   ballSpawnTimer = game.time.create(false);
 	game.time.events.add(Phaser.Timer.SECOND * 12, startSpawning, this);
