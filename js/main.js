@@ -1,8 +1,8 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
 	game.load.image('blueball', 'assets/images/blue_ball_32_trans.png');
-  game.load.image('redball', 'assets/images/red_ball_32_trans.png');
+	game.load.image('redball', 'assets/images/red_ball_32_trans.png');
 	game.load.audio('cerebral_infection', 'assets/audio/cerebral_infection.mp3')
 }
 
@@ -17,6 +17,10 @@ var gameOver;
 
 function create() {
   game.stage.backgroundColor = "#FFFFFF";
+	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+	game.scale.pageAlignVertically = true;
+	game.scale.setScreenSize(true);
+
 
 	music = game.add.audio('cerebral_infection');
 	music.volume = 0.20;
