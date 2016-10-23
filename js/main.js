@@ -27,6 +27,7 @@ function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
   player = game.add.sprite(game.world.centerX - 16, game.world.centerY - 16, 'blueball');
   game.physics.arcade.enable(player);
+	player.body.collideWorldBounds = true;
 
   enemyBallGroup = game.add.physicsGroup();
   ballCount = 0;
