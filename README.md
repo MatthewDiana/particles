@@ -1,6 +1,6 @@
-<img src="http://www.matthewdiana.com/res/particles_logo.png" target="_blank">
+<img src="http://www.matthewdiana.com/res/particles_logo.png">
 
-A fun and simple desktop and mobile HTML5 game.
+Dodge the particles in this fun and simple HTML5 game.
 
 ## Play
 
@@ -8,7 +8,7 @@ A fun and simple desktop and mobile HTML5 game.
 
 ## Modify
 
-Clone this repository
+Clone this repository:
 
 ```
 git clone https://github.com/MatthewDiana/particles.git
