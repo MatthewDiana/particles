@@ -1,4 +1,4 @@
-var game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'particles', { preload: preload, create: create, update: update });
 
 function preload() {
 	game.load.image('blueball', 'assets/images/blue_ball_32_trans.png');
@@ -17,10 +17,6 @@ var gameOver;
 
 function create() {
   game.stage.backgroundColor = "#FFFFFF";
-	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-	game.scale.pageAlignVertically = true;
-	game.scale.setScreenSize(true);
-
 
 	music = game.add.audio('cerebral_infection');
 	music.volume = 0.20;
@@ -32,7 +28,7 @@ function create() {
 
   enemyBallGroup = game.add.physicsGroup();
   ballCount = 0;
-	respawnDelay = 2500;
+	respawnDelay = 3000;
   gameOver = false;
   ballSpawnTimer = game.time.create(false);
 	game.time.events.add(Phaser.Timer.SECOND * 12, startSpawning, this);
