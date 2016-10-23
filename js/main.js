@@ -9,6 +9,7 @@ function preload() {
 
 var player;
 var music;
+var gameText;
 
 var enemyBallGroup;
 var ballSpawnTimer;
@@ -19,6 +20,7 @@ var faceArray;
 
 function create() {
   game.stage.backgroundColor = "#FFFFFF";
+	displayWelcomeText();
 
 	music = game.add.audio('cerebral_infection');
 	music.volume = 0.20;
@@ -42,20 +44,27 @@ function create() {
 function update() {
 
     game.physics.arcade.moveToPointer(player, 600);
-    if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y)) {
+    if (!Phaser.Rectangle.contains(player.body, game.input.x, game.input.y)) {
+			player.body.x = game.input.x;
+			player.body.y = game.input.y;
       player.body.velocity.setTo(0, 0);
     }
 
 		game.physics.arcade.collide(enemyBallGroup, enemyBallGroup);
-    if (game.physics.arcade.collide(player, enemyBallGroup, collisionHandler, processHandler, this)) {
-      console.log("boom");
-    }
+    game.physics.arcade.collide(player, enemyBallGroup, collisionHandler, processHandler, this);
 
 
 }
 
+function displayWelcomeText() {
+	var style = { align: 'middle' };
+	gameText = game.add.text(50, 50, 'Dodge the particles. Good luck.', style);
+	//gameText.addColor('#ff0000', 5);
+	//gameText.addColor('#0000FF', 8);
+}
+
 function startSpawning() {
-	gameText = null;
+	gameText.destroy();
 	spawnBall();
 	ballSpawnTimer.loop(respawnDelay, spawnBall, this);
 	ballSpawnTimer.start();
@@ -86,6 +95,6 @@ function collisionHandler(player, enemyBall) {
     gameOver = true;
 		music.stop();
     game.physics.arcade.gravity.y = 1800;
-    game.add.text(50, 50, "You lose. Final score: " + ballCount + " balls.")
+    gameText = game.add.text(50, 50, "Final score: " + ballCount + " balls")
   }
 }
