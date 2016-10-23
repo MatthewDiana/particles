@@ -19,8 +19,8 @@ function create() {
   game.stage.backgroundColor = "#FFFFFF";
 
 	music = game.add.audio('cerebral_infection');
+	music.volume = 0.20;
 	music.play();
-	music.volume = 0.1;
 
   game.physics.startSystem(Phaser.Physics.ARCADE);
   player = game.add.sprite(game.world.centerX - 16, game.world.centerY - 16, 'blueball');
@@ -43,6 +43,7 @@ function update() {
       player.body.velocity.setTo(0, 0);
     }
 
+		game.physics.arcade.collide(enemyBallGroup, enemyBallGroup);
     if (game.physics.arcade.collide(player, enemyBallGroup, collisionHandler, processHandler, this)) {
       console.log("boom");
     }
@@ -51,6 +52,7 @@ function update() {
 }
 
 function startSpawning() {
+	gameText = null;
 	spawnBall();
 	ballSpawnTimer.loop(respawnDelay, spawnBall, this);
 	ballSpawnTimer.start();
@@ -58,17 +60,16 @@ function startSpawning() {
 
 function spawnBall() {
   if (!gameOver) {
-    var newBall = enemyBallGroup.create( Math.random() * game.world.width - 32, Math.random() * game.world.height - 32, 'redball', 1);
+    var newBall = enemyBallGroup.create( game.world.randomX, game.world.randomY, 'redball');
     ballCount++;
     newBall.alpha = 0;
     var fadeIn = game.add.tween(newBall).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
     fadeIn.onComplete.add(function() {
-      game.physics.enable(newBall, Phaser.Physics.ARCADE);
+      game.physics.arcade.enable(newBall);
       newBall.body.velocity.setTo(Math.random() * 300, Math.random() * 300);
       newBall.body.collideWorldBounds = true;
       newBall.body.bounce.set(1);
     }, this);
-    enemyBallGroup.add(newBall);
   }
 }
 
@@ -83,5 +84,4 @@ function collisionHandler(player, enemyBall) {
     game.physics.arcade.gravity.y = 1800;
     game.add.text(50, 50, "You lose. Final score: " + ballCount + " balls.")
   }
-
 }
