@@ -16,7 +16,7 @@ SurvivalGame.prototype = {
         game.stage.backgroundColor = "#FFFFFF";
         gameText = game.add.text(50, 50, 'Dodge the particles. Good luck.');
     	music = game.add.audio('cerebral_infection');
-    	music.volume = 0.20;
+    	music.volume = 0.10;
     	music.play();
 
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -26,12 +26,12 @@ SurvivalGame.prototype = {
         enemyBallGroup = game.add.physicsGroup();
 
         ballCount = 0;
-    	respawnDelay = 3000;
+    	respawnDelay = 5000;
         gameOver = false;
         maxBallSpeed = 300;
 
         ballSpawnTimer = game.time.create(false);
-    	game.time.events.add(Phaser.Timer.SECOND * 12, this.startSpawning, this);
+    	game.time.events.add(Phaser.Timer.SECOND * 11.5, this.startSpawning, this);
     },
 
     update: function() {
@@ -55,7 +55,6 @@ SurvivalGame.prototype = {
     spawnBall: function() {
         if (!gameOver) {
             let newBall = game.add.sprite( game.world.randomX, game.world.randomY, 'redball');
-            ballCount++;
             newBall.alpha = 0;
             let fadeIn = game.add.tween(newBall).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
             fadeIn.onComplete.add(function() {
@@ -67,6 +66,7 @@ SurvivalGame.prototype = {
                 newBall.body.bounce.set(1);
     			enemyBallGroup.add(newBall);
             }, this);
+            ballCount++;
         }
     },
 
