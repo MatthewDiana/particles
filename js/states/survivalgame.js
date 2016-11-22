@@ -15,9 +15,9 @@ SurvivalGame.prototype = {
     create: function() {
         game.stage.backgroundColor = "#FFFFFF";
         gameText = game.add.text(50, 50, 'Dodge the particles. Good luck.');
-    	music = game.add.audio('cerebral_infection');
-    	music.volume = 0.10;
-    	music.play();
+    	  music = game.add.audio('cerebral_infection');
+    	  music.volume = 0.10;
+    	  music.play();
 
         game.physics.startSystem(Phaser.Physics.ARCADE);
         player = game.add.sprite(game.world.centerX - 16, game.world.centerY - 16, 'blueball');
@@ -26,12 +26,12 @@ SurvivalGame.prototype = {
         enemyBallGroup = game.add.physicsGroup();
 
         ballCount = 0;
-    	respawnDelay = 5000;
+    	  respawnDelay = 5000;
         gameOver = false;
         maxBallSpeed = 300;
 
         ballSpawnTimer = game.time.create(false);
-    	game.time.events.add(Phaser.Timer.SECOND * 11.5, this.startSpawning, this);
+    	  game.time.events.add(Phaser.Timer.SECOND * 11.5, this.startSpawning, this);
     },
 
     update: function() {
@@ -46,10 +46,10 @@ SurvivalGame.prototype = {
     },
 
     startSpawning: function() {
-    	gameText.destroy();
-    	this.spawnBall();
-    	ballSpawnTimer.loop(respawnDelay, this.spawnBall, this);
-    	ballSpawnTimer.start();
+    	 gameText.destroy();
+       this.spawnBall();
+       ballSpawnTimer.loop(respawnDelay, this.spawnBall, this);
+       ballSpawnTimer.start();
     },
 
     spawnBall: function() {
@@ -59,12 +59,12 @@ SurvivalGame.prototype = {
             let fadeIn = game.add.tween(newBall).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
             fadeIn.onComplete.add(function() {
                 game.physics.arcade.enable(newBall);
-    			let randXVelocity = Math.floor(Math.random() * (maxBallSpeed + maxBallSpeed) + 1) - maxBallSpeed;
-    			let randYVelocity = Math.floor(Math.random() * (maxBallSpeed + maxBallSpeed) + 1) - maxBallSpeed;
+                let randXVelocity = Math.floor(Math.random() * (maxBallSpeed + maxBallSpeed) + 1) - maxBallSpeed;
+                let randYVelocity = Math.floor(Math.random() * (maxBallSpeed + maxBallSpeed) + 1) - maxBallSpeed;
                 newBall.body.velocity.setTo(randXVelocity, randYVelocity);
                 newBall.body.collideWorldBounds = true;
                 newBall.body.bounce.set(1);
-    			enemyBallGroup.add(newBall);
+                enemyBallGroup.add(newBall);
             }, this);
             ballCount++;
         }

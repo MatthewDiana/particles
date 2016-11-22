@@ -7,6 +7,10 @@ Main.prototype = {
         game.load.script('loadingsplash', 'js/states/loadingsplash.js');
     },
     create: function() {
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.maxWidth = 800;
+        game.scale.maxHeight = 600;
+
         game.state.add('LoadingSplash', LoadingSplash);
         game.state.start('LoadingSplash');
     }
