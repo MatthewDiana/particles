@@ -16,7 +16,7 @@ git clone https://github.com/MatthewDiana/particles.git
 
 Game logic can be found in `js/main.js`. Images and audio can be found in `assets/`.
 
-You should be using a local web server for your development (learn why loading assets over `file://` can be dangerous [here](https://blog.chromium.org/2008/12/security-in-depth-local-web-pages.html)). If you have Python installed on your system, this can be easily accomplished by spawning a `SimpleHttpServer` in the project's root directory:
+You should be using a local web server for your development (learn why loading assets over `file://` can be dangerous [here](https://blog.chromium.org/2008/12/security-in-depth-local-web-pages.html)). If you have Python installed on your system, this can be easily accomplished by spawning a `SimpleHTTPServer` in the project's root directory:
 
 ```
 python -m SimpleHTTPServer 8080
