@@ -11,7 +11,7 @@ Dodge the particles in this fun and simple HTML5 game.
 Clone this repository:
 
 ```
-git --depth=1 clone https://github.com/MatthewDiana/particles.git
+git clone --depth=1 https://github.com/MatthewDiana/particles.git
 ```
 
 Entry point can be found in `js/main.js`. Code for the various game states can be found in `js/states/`. Images and audio can be found in `assets/`.
