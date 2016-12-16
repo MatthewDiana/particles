@@ -79,7 +79,7 @@ SurvivalGame.prototype = {
       gameOver = true;
       music.stop();
       game.physics.arcade.gravity.y = 1800;
-      gameText = game.add.text(50, 50, `Final Score: ${ballCount} Particles`);
+      gameText = game.add.text(50, 50, `Score: ${ballCount} particles`);
       retryText = game.add.text(game.world.width - 200, 50, `Play again`);
       retryText.inputEnabled = true;
       retryText.events.onInputOut.add(() => retryText.fill = '#000', this);
